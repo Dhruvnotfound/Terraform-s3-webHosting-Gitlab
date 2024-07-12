@@ -7,8 +7,8 @@ terraform {
 }
 
 # Configure the AWS Provider
-provider "aws" {
-  region                   = "us-east-1"
-  shared_credentials_files = ["~/.aws/credentials"]
-  profile                  = "vscode_awskey"
+  provider "aws" {
+  region     = $AWS_DEFAULT_REGION
+  access_key = $AWS_ACCESS_KEY_ID
+  secret_key = $AWS_SECRET_ACCESS_KEY
 }
