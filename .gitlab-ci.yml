@@ -1,0 +1,42 @@
+stages:
+  - validate
+  - plan
+  - apply
+  - upload
+  - destroy
+
+variables:
+  TF_VERSION: 1.9.2
+  TF_WORKING_DIR: terraform # Specify the directory containing your Terraform scripts
+
+before_script:
+  # install terraform globally in the pipeline 
+  - apk add --no-cache curl jq unzip
+  - curl -o /tmp/terraform.zip
+    https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip
+  - unzip /tmp/terraform.zip -d /usr/local/bin
+  - terraform --version
+
+validate:
+  stage: validate
+  script:
+    - cd $TF_WORKING_DIR
+    - terraform init
+    - terraform validate
+
+plan:
+  stage: plan
+  script:
+    - cd $TF_WORKING_DIR
+    - terraform init
+    - terraform plan -out=tfplan
+  artifact:
+    paths:
+      - $TF_WORKING_DIR/tfplan
+
+apply:
+  stage: apply
+  script:
+    - cd $TF_WORKING_DIR
+    - terraform apply
+  when: manual

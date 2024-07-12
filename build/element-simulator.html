@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxygen-Hydrogen Interaction Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Oxygen-Hydrogen Interaction Simulator</h1>
+        
+        <div class="control">
+            <label>Temperature (°C): <span id="tempValue">25</span>°C</label>
+            <input type="range" id="tempSlider" min="-50" max="200" value="25">
+        </div>
+        
+        <div class="control">
+            <label>Pressure (atm): <span id="pressureValue">1</span> atm</label>
+            <input type="range" id="pressureSlider" min="0.01" max="100" step="0.01" value="1">
+        </div>
+        
+        <div class="control">
+            <select id="elementSelect">
+                <option value="">Select element</option>
+                <option value="H">Hydrogen</option>
+                <option value="O">Oxygen</option>
+            </select>
+            <input type="number" id="particleCount" value="1" min="1">
+            <button id="addParticles">Add Particles</button>
+            <button id="resetSimulation">Reset</button>
+        </div>
+        
+        <canvas id="simulationCanvas" width="400" height="300"></canvas>
+        
+        <div class="element-cards">
+            <div class="card" style="background-color: #FF000020;">
+                <h2 style="color: #FF0000;">Hydrogen (H)</h2>
+                <p>State: <span id="H-state">Gas</span></p>
+                <p>Count: <span id="H-count">0</span></p>
+            </div>
+            <div class="card" style="background-color: #0000FF20;">
+                <h2 style="color: #0000FF;">Oxygen (O)</h2>
+                <p>State: <span id="O-state">Gas</span></p>
+                <p>Count: <span id="O-count">0</span></p>
+            </div>
+            <div class="card" style="background-color: #00FFFF20;">
+                <h2 style="color: #00FFFF;">Water (H2O)</h2>
+                <p>State: <span id="H2O-state">Liquid</span></p>
+                <p>Count: <span id="H2O-count">0</span></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
