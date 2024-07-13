@@ -32,6 +32,7 @@ data "aws_iam_policy_document" "allow_access_from_another_account" {
     }
     actions = [
       "s3:GetObject",
+      "s3:PutBucketPolicy",
     ]
     resources = [
       aws_s3_bucket.es-s3.arn,
