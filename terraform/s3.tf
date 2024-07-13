@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "es-s3" {
 resource "aws_s3_bucket_website_configuration" "es-s3hosting" {
   bucket = aws_s3_bucket.es-s3.id
   index_document {
-    suffix = "index.html"
+    suffix = "element-simulator.html"
   }
 }
 resource "aws_s3_bucket_public_access_block" "es-s3public" {
@@ -32,7 +32,6 @@ data "aws_iam_policy_document" "allow_access_from_another_account" {
     }
     actions = [
       "s3:GetObject",
-      "s3:PutBucketPolicy",
     ]
     resources = [
       aws_s3_bucket.es-s3.arn,

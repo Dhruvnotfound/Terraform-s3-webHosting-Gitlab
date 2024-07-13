@@ -17,6 +17,7 @@ variables:
     TF_VAR_aws_region: ${AWS_DEFAULT_REGION}
     TF_VAR_aws_access_key: ${AWS_ACCESS_KEY_ID}
     TF_VAR_aws_secret_key: ${AWS_SECRET_ACCESS_KEY}
+    AWS_BUCKET_NAME: element-simulation-3107
 
 before_script:
     - terraform --version
@@ -45,6 +46,18 @@ apply:
             - $TF_WORKING_DIR/terraform.tfstate
             - $TF_WORKING_DIR/terraform.tfstate.backup
     when: manual
+
+deploy to s3:
+    stage: upload
+    image: 
+        name: amazon/aws-cli:2.17.11
+        entrypoint: [""]
+    before_script: []
+    script:
+        - aws --version
+        - aws s3 sync build/ s3://$AWS_BUCKET_NAME/
+    needs:
+        - apply
 
 destroy:
     stage: destroy
